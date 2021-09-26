@@ -20,7 +20,7 @@ The program .jar file should be created in build > libs directory.
 - log4j 2.14.1
 
 ## Old version
-This repository was updated from a version that was written in Python. You can check the archived resipotory [here](https://github.com/eyhc1/visual-schedule-to-ics).
+This repository was updated from a version that was written in Python. You can check the archived repository [here](https://github.com/eyhc1/visual-schedule-to-ics).
 
 ## Issues
 - Logs are neither printing out in the console nor being exported
