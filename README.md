@@ -3,6 +3,8 @@ Export your class schedule from MyUW to and .ics file so that one can import it 
 Google calendar
 
 ## Use
+### Directly use
+[Download the .jar file](https://github.com/eyhc1/ScheduleMyClasses/releases/download/UWScheduleExporter/ScheduleMyClasses-2.0.0.jar) from release to use the program directly.
 ### Develop
 Clone this repository into your computer, then open command prompt and direct it to the folder where all the files are
 located. Then type `gradlew build` to build the project. If you are using an IDE such as Intellij, it might going to
