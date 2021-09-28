@@ -15,6 +15,7 @@ Type `gradlew jar` in the command prompt which has been directed into the projec
 The program .jar file should be created in build > libs directory.
 
 ## Depends
+- Java 8
 - jsoup 1.10.3
 - gson 2.8.7
 - log4j 2.14.1
@@ -25,6 +26,7 @@ This repository was updated from a version that was written in Python. You can c
 ## Issues
 - Logs are neither printing out in the console nor being exported
 - Sometimes the error popup shows nothing
+- Program crashed when attempting to parse on web in Windows 11
 
 ## Todo:
 - [ ] Fix Issues
