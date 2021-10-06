@@ -27,6 +27,7 @@ This repository was updated from a version that was written in Python. You can c
 - Logs are neither printing out in the console nor being exported
 - Sometimes the error popup shows nothing
 - Program crashed when attempting to parse on web in Windows 11
+- Not working if 2 Factor Authendication (2FA)
 
 ## Todo:
 - [ ] Fix Issues
