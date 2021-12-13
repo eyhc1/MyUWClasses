@@ -32,4 +32,4 @@ This repository was updated from a version that was written in Python. You can c
 ## Todo:
 - [ ] Fix Issues
 - [ ] Convert final exam schedule as well
-
+- [ ] Disable log4j for security
