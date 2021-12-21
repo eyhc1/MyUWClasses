@@ -4,7 +4,7 @@ Google calendar.
 
 ## Use
 ### Directly use
-[Download the .jar file](https://github.com/eyhc1/ScheduleMyClasses/releases/download/UWScheduleExporter/ScheduleMyClasses-2.0.0.jar) from release to use the program directly.
+[Download the .jar file](https://github.com/eyhc1/ScheduleMyClasses/releases) from release to use the program directly. Due to log4j2 security issue, it is highly recommended to download release version 3 and up.
 ### Develop
 Clone this repository into your computer, then open command prompt and direct it to the folder where all the files are
 located. Then type `gradlew build` to build the project. If you are using an IDE such as Intellij, it might going to
@@ -18,18 +18,18 @@ The program .jar file should be created in build > libs directory.
 - Java 8
 - jsoup 1.10.3
 - gson 2.8.7
-- log4j 2.14.1
+- log4j 2.14.1 (very old versions only)
 
 ## Old version
 This repository was updated from a version that was written in Python. You can check the archived repository [here](https://github.com/eyhc1/visual-schedule-to-ics).
 
 ## Issues
-- Logs are neither printing out in the console nor being exported
 - Sometimes the error popup shows nothing
+- Some popup message not showing anything messages
 - Program crashed when attempting to parse on web in Windows 11
-- Not working if 2 Factor Authendication (2FA)
+- <s>Not working for 2 Factor Authendication (2FA)</s>
 
 ## Todo:
 - [ ] Fix Issues
 - [ ] Convert final exam schedule as well
-
+- [x] Disable log4j for security

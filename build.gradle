@@ -3,18 +3,15 @@ plugins {
 }
 
 group 'me.eyhc'
-version '2.0.0'
+version '3.0.0'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    // jsoup HTML parser library @ https://jsoup.org/
     implementation 'org.jsoup:jsoup:1.10.3'
     implementation 'com.google.code.gson:gson:2.8.7'
-    implementation 'org.apache.logging.log4j:log4j-api:2.14.1'
-    implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
     implementation 'org.jetbrains:annotations:20.1.0'
 
 }

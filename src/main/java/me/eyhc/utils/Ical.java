@@ -49,14 +49,16 @@ public class Ical {
                       String days,
                       float lat,
                       float lng,
-                      String discription)
+                      String description)
             throws IOException {
         calStr.write("BEGIN:VEVENT\n");
-        calStr.write("RRULE:FREQ=WEEKLY;BYDAY=" + days + ";UNTIL=" + endDate + "T230000Z\n");
+        if (!days.isEmpty()) {
+            calStr.write("RRULE:FREQ=WEEKLY;BYDAY=" + days + ";UNTIL=" + endDate + "T230000Z\n");
+        }
         calStr.write("DTSTART:" + startDate + "T" + startTime + "00\n");
         calStr.write("DTEND:" + startDate + "T" + endTime + "00\n");
         calStr.write("SUMMARY:" + summary + "\n");
-        calStr.write("DESCRIPTION:room: " + discription + "\n");
+        calStr.write("DESCRIPTION:" + description + "\n");
         calStr.write("LOCATION:" + lat + "," + lng + "\n");
         calStr.write("END:VEVENT\n");
     }

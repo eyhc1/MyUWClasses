@@ -12,7 +12,7 @@ import java.util.InputMismatchException;
 import java.util.Objects;
 
 public class LoginUI extends JFrame implements ActionListener {
-    private static final String TITLE = "ScheduleMyClasses 2.0.0";
+    private static final String TITLE = "ScheduleMyClasses 3.0.0rc2";
     private static final int WIDTH = 380;
     private static final int HEIGHT = 220;
     private final JTextField netidEntry;
@@ -36,8 +36,7 @@ public class LoginUI extends JFrame implements ActionListener {
         this.loginBut.setEnabled(false);
         this.loginBut.addActionListener(this);
         this.agree.addActionListener(e -> loginBut.setEnabled(true));
-        String longMsg1 = "I agree that I will use the program at my own risk and disabled 2FA to have the program " +
-                "worked properly.";
+        String longMsg1 = "I have acknowledged that the program is not affiliated with UW and I will use the program at my own risk.";
         JLabel clarifyPrompt = new JLabel(
                 String.format("<html><div style=\"width:%dpx;\">%s</div></html>", WIDTH - 128, longMsg1));
         clarifyPrompt.setFont(clarifyPrompt.getFont().deriveFont(12f));
@@ -87,7 +86,7 @@ public class LoginUI extends JFrame implements ActionListener {
                     ParseClasses p = new ParseClasses();
                     String content = p.getUW(netID, password,
                             "https://my.uw.edu/api/v1/visual_schedule/current").body().text();
-                    p.parseNExport(content, netID);
+                    p.parseNExport(content, "ClassSchedule_" + netID);
                     this.hide();
                     String[] o = {"Exit", "Make another one"};
                     int choice = JOptionPane.showOptionDialog(this,
@@ -120,7 +119,7 @@ public class LoginUI extends JFrame implements ActionListener {
             } else {
                 this.loginBut.setEnabled(false);
                 JOptionPane.showMessageDialog(this,
-                        "You have to agree the terms and disable 2FA, then check the box!",
+                        "You have to agree and acknowledge the terms, then check the box!",
                         "Please check the box",
                         JOptionPane.ERROR_MESSAGE);
             }
