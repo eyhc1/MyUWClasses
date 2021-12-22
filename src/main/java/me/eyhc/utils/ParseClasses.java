@@ -78,7 +78,7 @@ public class ParseClasses {
                     days.toString().replace("[", "").replace("]", ""),
                     loc[0],
                     loc[1],
-                    "<a href=\"http://www.washington.edu/students/maps/map.cgi?" + building +"\">" + building + "</a>   " + room);
+                    "<a href=\"http://www.washington.edu/students/maps/map.cgi?" + building +"\">" + building + "</a> " + room);
             JsonObject finals = classInfo.get("final_exam").getAsJsonObject();
             String confirmed = "";
             if (!finals.get("is_confirmed").getAsBoolean()) {
@@ -90,6 +90,10 @@ public class ParseClasses {
     }
 
     public Document getUW(String username, String password, String url) throws IOException {
+        return getUW(username, password, url, false);
+    }
+
+    public Document getUW(String username, String password, String url, boolean disablePrompt) throws IOException {
         Response re = Jsoup.connect(url)
                 .method(Method.GET)
                 .execute();
@@ -137,16 +141,25 @@ public class ParseClasses {
                         .execute();
                 s = d.parse();
                 String txid = new JsonParser().parse(s.body().text()).getAsJsonObject().get("response").getAsJsonObject().get("txid").getAsString();
-                JOptionPane.showMessageDialog(null,
-                        "A 2FA push has been sent to your default device " + phone + "\nPress OK to continue",
-                        "Check your " + phone + " for 2FA",
-                        JOptionPane.INFORMATION_MESSAGE);
-                d = Jsoup.connect(duoHost + "/frame/status")
-                        .data("sid", sid)
-                        .data("txid", txid)
-                        .ignoreContentType(true)
-                        .method(Method.POST)
-                        .execute();
+                if (disablePrompt) {
+                    d = Jsoup.connect(duoHost + "/frame/status")
+                            .data("sid", sid)
+                            .data("txid", txid)
+                            .ignoreContentType(true)
+                            .method(Method.POST)
+                            .execute();
+                } else {
+                    Object[] choices = {"Approved, continue!"};
+                    Object defaultChoice = choices[0];
+                    JOptionPane.showOptionDialog(null,
+                            "A 2FA push has been sent to your default device " + phone + "\nPress the button below to once you accepted on your device",
+                            "Check your " + phone + " for 2FA",
+                            JOptionPane.YES_OPTION,
+                            JOptionPane.INFORMATION_MESSAGE,
+                            null,
+                            choices,
+                            defaultChoice);
+                }
                 d = Jsoup.connect(duoHost + "/frame/status")
                         .data("sid", sid)
                         .data("txid", txid)
@@ -193,7 +206,6 @@ public class ParseClasses {
 
 
     public float[] locations (String building) throws IOException {
-        // https://stackoverflow.com/a/43330690
         URLConnection c = new URL("https://www.washington.edu/maps/?json=campusmap.get_locations")
                 .openConnection();
         Scanner s = new Scanner(c.getInputStream());

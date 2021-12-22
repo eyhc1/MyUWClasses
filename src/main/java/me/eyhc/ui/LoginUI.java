@@ -3,7 +3,6 @@ package me.eyhc.ui;
 import me.eyhc.utils.ParseClasses;
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,21 +11,23 @@ import java.util.InputMismatchException;
 import java.util.Objects;
 
 public class LoginUI extends JFrame implements ActionListener {
-    private static final String TITLE = "ScheduleMyClasses 3.0.0rc2";
+    private static final String TITLE = "ScheduleMyClasses 3.0.0";
     private static final int WIDTH = 380;
     private static final int HEIGHT = 220;
     private final JTextField netidEntry;
     private final JPasswordField passwordEntry;
     private final JCheckBox agree;
     private final JButton loginBut;
+    private boolean prompt2fa;
 
 
-    public LoginUI() {
-        this.netidEntry = new JTextField(16);
+    public LoginUI(String netid, String password) {
+        this.netidEntry = new JTextField(netid, 16);
         this.netidEntry.setFont(this.netidEntry.getFont().deriveFont(14f));
-        this.passwordEntry = new JPasswordField(16);
+        this.passwordEntry = new JPasswordField(password, 16);
         this.passwordEntry.setFont(this.passwordEntry.getFont().deriveFont(14f));
         this.agree = new JCheckBox();
+        this.prompt2fa = false;
         JLabel netidLable = new JLabel("UW NetID");
         netidLable.setFont(netidLable.getFont().deriveFont(14f));
         JLabel passwordLable = new JLabel("Password");
@@ -69,6 +70,14 @@ public class LoginUI extends JFrame implements ActionListener {
         this.setTitle(TITLE);
     }
 
+    public LoginUI() {
+        LoginUI loginUI = new LoginUI("","");
+        this.netidEntry = loginUI.netidEntry;
+        this.passwordEntry = loginUI.passwordEntry;
+        this.agree = loginUI.agree;
+        this.loginBut = loginUI.loginBut;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Start Export")) {
@@ -85,7 +94,7 @@ public class LoginUI extends JFrame implements ActionListener {
                     this.update(this.getGraphics());
                     ParseClasses p = new ParseClasses();
                     String content = p.getUW(netID, password,
-                            "https://my.uw.edu/api/v1/visual_schedule/current").body().text();
+                            "https://my.uw.edu/api/v1/visual_schedule/current", this.prompt2fa).body().text();
                     p.parseNExport(content, "ClassSchedule_" + netID);
                     this.hide();
                     String[] o = {"Exit", "Make another one"};
@@ -124,5 +133,9 @@ public class LoginUI extends JFrame implements ActionListener {
                         JOptionPane.ERROR_MESSAGE);
             }
         }
+    }
+
+    public void setPrompt2faEnabled(Boolean enabled) {
+        this.prompt2fa = enabled;
     }
 }

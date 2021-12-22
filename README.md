@@ -13,12 +13,23 @@ edit the programs.
 ### Compile and jar
 Type `gradlew jar` in the command prompt which has been directed into the project folder to create a standalone program.
 The program .jar file should be created in build > libs directory.
+### Optional Arguments
+There are three argumentscan be used when calling the .jar file. Default usage is `java -jar ScheduleMyClasses-VERSIONID
+[Option 1]=[value] [Option 2]=[value] [Option 3]`. The three valid options are:  
+`-netid`: Your UWNetID, this option typically followed by  
+`-password`: The password associated with that NetID account  
+`-disable2faDiag`: If Duo 2fa enabled, this option will disable any prompt that will pop up during the login process and
+assumed you have your default device nearby and available  
+With `-netid` and `-password` can autofill the text field and can be functioned as "remember me" when have the argument 
+saved in a batch file.
+
 
 ## Depends
 - Java 8
 - jsoup 1.10.3
 - gson 2.8.7
-- log4j 2.14.1 (very old versions only)
+- jopt-simple 5.0.3
+- <s>log4j 2.14.1</s> (very old versions only)
 
 ## Old version
 This repository was updated from a version that was written in Python. You can check the archived repository [here](https://github.com/eyhc1/visual-schedule-to-ics).
