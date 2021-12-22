@@ -13,7 +13,7 @@ edit the programs.
 ### Compile and jar
 Type `gradlew jar` in the command prompt which has been directed into the project folder to create a standalone program.
 The program .jar file should be created in build > libs directory.
-### Optional Arguments
+### Optional Arguments (Version 3.0.0 and up)
 There are three argumentscan be used when calling the .jar file. Default usage is `java -jar ScheduleMyClasses-VERSIONID
 [Option 1]=[value] [Option 2]=[value] [Option 3]`. The three valid options are:  
 `-netid`: Your UWNetID, this option typically followed by  
